@@ -5,10 +5,16 @@ test('test', async ({ page }) => {
   await page.getByTestId('text-input').click();
   await page.getByTestId('text-input').fill('Buy Groceries');
   await page.getByTestId('text-input').press('Enter');
+
+  await expect(page.getByText('Buy Groceries')).toBeVisible();
+
   await page.getByTestId('text-input').fill('Pay bills');
   await page.getByTestId('text-input').press('Enter');
 
+  await expect(page.getByText('Pay bills')).toBeVisible();
+
   const listItems = page.getByTestId('todo-item');
-  await expect(listItems).toHaveCount(1);
+  await expect(listItems).toHaveCount(2);
+  
 //   console.log(`Number of items in the list: ${count}`);
 });
