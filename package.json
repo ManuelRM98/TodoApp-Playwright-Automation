@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ManuelRM98/TodoApp-Playwright-Automation#readme",
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^25.2.1"
   }
 }
