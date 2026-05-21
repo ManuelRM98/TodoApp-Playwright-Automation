@@ -50,8 +50,3 @@ The project is pre-configured to ensure reliable execution and deep debugging ca
 ### Prerequisites
 
 Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
-
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/your-username/todomvc-playwright-tests.git](https://github.com/your-username/todomvc-playwright-tests.git)
-cd todomvc-playwright-tests
