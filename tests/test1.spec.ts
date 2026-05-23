@@ -26,7 +26,7 @@ test('TC-001 | Add New Todos', async ({ page }) => {
   }
 
   await expect(openWebsite.listOfItems()).toHaveCount(2);
-  // openWebsite.listOfItems(2);
+
 
 
   
