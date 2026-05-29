@@ -8,6 +8,8 @@ export class todoPage { //name has to match the ts file
     private readonly todoItem: Locator;
     private readonly buttonItem: Locator;
     private readonly listItems: Locator;
+    private readonly footerNavCompleted: Locator;
+    private readonly itemsLeft: Locator;
 
     constructor(page:Page) {
         this.page = page;
@@ -15,10 +17,12 @@ export class todoPage { //name has to match the ts file
         this.todoItem = page.getByTestId('todo-item-label');
         this.buttonItem = page.getByTestId('todo-item-toggle');
         this.listItems = page.getByTestId('todo-item');
+        this.footerNavCompleted = page.getByText('Completed', {exact : true});
+        this.itemsLeft = page.locator('.todo-count')
     }
 
     //methods
-    async navigate(): Promise<void>{
+    async navigate() {
         await this.page.goto('');
     }
 
@@ -49,4 +53,24 @@ export class todoPage { //name has to match the ts file
 
     }
 
+
+
+    async itemsCompleted(): Promise<void>{
+
+        await this.footerNavCompleted.click();
+    }
+
+    clickElement(): Locator{
+
+        return this.buttonItem
+    }
+
+
+    async pendingItems(numberItems : string): Promise<void>{
+        await expect(this.itemsLeft).toHaveText(numberItems);
+    }
+
+//   await page.getByText('Completed', {exact : true}).click();
+//   await expect(listItems).toHaveCount(1);
+//   await expect(page.locator('.todo-count')).toHaveText('1 item left!')
 }
