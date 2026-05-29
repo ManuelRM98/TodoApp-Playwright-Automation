@@ -44,10 +44,20 @@ test('TC-001 | Add New Todos', async ({ page }) => {
   await expect(openWebsite.getItemFromList(expectedTodos[0])).toBeVisible();
 
 //   //nth() to find elements
-  
-// //   console.log(`Number of items in the list: ${count}`);
+//   console.log(`Number of items in the list: ${count}`);
  });
 
+ test('TC-003 | Edit Todo', async({ page }) =>{
+// Double-clicks a todo item label, updates the text to "Buy veggies", and ensures the state persists.
+
+  for (const result of expectedTodos){
+    await expect(openWebsite.getItemFromList(result)).toBeVisible();
+  }
+
+  await openWebsite.updateItem(expectedTodos[1], 'Buy veggies');
+  await expect(openWebsite.getItemFromList('Buy veggies')).toBeVisible();
+
+ });
 
 
 });

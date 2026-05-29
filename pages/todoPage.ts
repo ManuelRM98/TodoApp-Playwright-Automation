@@ -2,7 +2,7 @@ import { Page, Locator, expect} from '@playwright/test';
 
 export class todoPage { //name has to match the ts file
 
-    //properties
+    //👇 This declaration is called an "Instance Property" or "Class Property"
     private readonly page: Page;
     private readonly fieldInput: Locator;
     private readonly todoItem: Locator;
@@ -10,11 +10,14 @@ export class todoPage { //name has to match the ts file
     private readonly listItems: Locator;
     private readonly footerNavCompleted: Locator;
     private readonly itemsLeft: Locator;
+    private readonly editTodo: Locator;
 
     constructor(page:Page) {
+        //  👇 This assignment is called "Property Initialization" inside the "Constructor Method"
         this.page = page;
         this.fieldInput = page.getByTestId('text-input');
         this.todoItem = page.getByTestId('todo-item-label');
+        this.editTodo = page.locator('[data-testid="text-input"]:not([placeholder])');
         this.buttonItem = page.getByTestId('todo-item-toggle');
         this.listItems = page.getByTestId('todo-item');
         this.footerNavCompleted = page.getByText('Completed', {exact : true});
@@ -68,6 +71,17 @@ export class todoPage { //name has to match the ts file
 
     async pendingItems(numberItems : string): Promise<void>{
         await expect(this.itemsLeft).toHaveText(numberItems);
+    }
+
+    private editItem(itemName: string): Locator{
+        return this.listItems.filter({has: this.editTodo.filter({hasText: itemName})});
+    }
+
+    async updateItem(currentName : string, newName : string): Promise<void>{
+        await this.todoItem.filter({hasText: currentName}).dblclick();
+
+        await this.editTodo.fill(newName);
+        await this.editTodo.press('Enter');
     }
 
 //   await page.getByText('Completed', {exact : true}).click();
