@@ -11,6 +11,8 @@ export class todoPage { //name has to match the ts file
     private readonly footerNavCompleted: Locator;
     private readonly itemsLeft: Locator;
     private readonly editTodo: Locator;
+    private readonly deleteButton: Locator;
+    private readonly deleteButtonTestId = 'todo-item-button';
 
     constructor(page:Page) {
         //  👇 This assignment is called "Property Initialization" inside the "Constructor Method"
@@ -21,7 +23,9 @@ export class todoPage { //name has to match the ts file
         this.buttonItem = page.getByTestId('todo-item-toggle');
         this.listItems = page.getByTestId('todo-item');
         this.footerNavCompleted = page.getByText('Completed', {exact : true});
-        this.itemsLeft = page.locator('.todo-count')
+        this.itemsLeft = page.locator('.todo-count'); 
+        this.deleteButton = page.getByTestId('todo-item-button');
+
     }
 
     //methods
@@ -82,6 +86,19 @@ export class todoPage { //name has to match the ts file
 
         await this.editTodo.fill(newName);
         await this.editTodo.press('Enter');
+    }
+
+    async deleteItem(itemName : string): Promise<void>{
+
+        const row = this.listItems.filter({hasText: itemName});
+        const deleteButton = row.getByTestId(this.deleteButtonTestId); 
+
+        await row.hover();
+        await expect(deleteButton).toBeVisible();
+        await deleteButton.click();
+        
+        
+
     }
 
 //   await page.getByText('Completed', {exact : true}).click();

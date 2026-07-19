@@ -60,4 +60,20 @@ test('TC-001 | Add New Todos', async ({ page }) => {
  });
 
 
+ test('TC-004 | Delete Todo', async({ page }) =>{
+// Double-clicks a todo item label, updates the text to "Buy veggies", and ensures the state persists.
+
+  for (const result of expectedTodos){
+    await expect(openWebsite.getItemFromList(result)).toBeVisible();
+  }
+
+  await openWebsite.deleteItem(expectedTodos[1]);
+  await expect(openWebsite.getItemFromList(expectedTodos[1])).toBeHidden();
+
+ });
+
+
+ 
+
+
 });
